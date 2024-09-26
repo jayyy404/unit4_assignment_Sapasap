@@ -11,7 +11,6 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      title: 'John Paul Sapasap Profile',
       home: ProfileScreen(),
     );
   }
@@ -26,12 +25,12 @@ class ProfileScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text('John Paul Sapasap Profile'),
         centerTitle: true,
-        backgroundColor: Colors.blue[300],
+        backgroundColor: Colors.blue[100],
       ),
       backgroundColor: Colors.blue[300],
       body: SafeArea(
         child: SingleChildScrollView(
-          padding: const EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(15.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -82,52 +81,54 @@ class ProfileScreen extends StatelessWidget {
                 mainAxisSpacing: 10.0,
                 children: const [
                   InfoBox(
-                    title: 'Personal Information',
-                    content: Column(
-                      children: [
-                        InfoRow(icon: Icons.person, label: 'John Paul Sapasap'),
-                        InfoRow(icon: Icons.home, label: 'Jaro, Iloilo City'),
-                        InfoRow(icon: Icons.cake, label: 'Age: 21'),
-                      ],
-                    ),
+                    title: 'Basic Information',
+                    content: [
+                      InfoRow(icon: Icons.person, label: 'John Paul Sapasap'),
+                      SizedBox(height: 10.0),
+                      InfoRow(icon: Icons.home, label: 'Jaro, Iloilo City'),
+                      SizedBox(
+                        height: 10.0,
+                      ),
+                      InfoRow(icon: Icons.cake, label: 'Age: 21'),
+                    ],
                   ),
                   InfoBox(
                     title: 'School',
-                    content: Column(
-                      children: [
-                        InfoRow(
-                            icon: Icons.school,
-                            label: 'West Visayas State University'),
-                        InfoRow(
-                            icon: Icons.email,
-                            label: 'johnpaul.sapasap@wvsu.edu.ph'),
-                        InfoRow(icon: Icons.phone, label: '+639502116505'),
-                      ],
-                    ),
+                    content: [
+                      InfoRow(
+                          icon: Icons.school,
+                          label: 'West Visayas State University'),
+                      SizedBox(
+                        height: 3.0,
+                      ),
+                      InfoRow(
+                          icon: Icons.email,
+                          label: 'johnpaul.sapasap@wvsu.edu.ph'),
+                      SizedBox(height: 2.5),
+                      InfoRow(icon: Icons.phone, label: '+639502116505'),
+                    ],
                   ),
                   InfoBox(
                     title: 'Hobbies',
-                    content: Column(
-                      children: [
-                        InfoRow(icon: Icons.games, label: 'Video Games'),
-                        InfoRow(icon: Icons.code, label: 'Coding'),
-                        InfoRow(icon: Icons.movie, label: 'Watching Movies'),
-                      ],
-                    ),
+                    content: [
+                      InfoRow(icon: Icons.games, label: 'Video Games'),
+                      SizedBox(height: 16.0),
+                      InfoRow(icon: Icons.code, label: 'Coding'),
+                      SizedBox(height: 16.0),
+                      InfoRow(icon: Icons.movie, label: 'Watching Movies'),
+                    ],
                   ),
                   InfoBox(
                     title: 'Social Media',
-                    content: Column(
-                      children: [
-                        InfoRow(
-                            icon: Icons.facebook, label: 'John Paul Sapasap'),
-                        InfoRow(
-                            icon: FontAwesomeIcons.instagram,
-                            label: '@johnpaulsapasap'),
-                        InfoRow(
-                            icon: FontAwesomeIcons.github, label: 'jayy404'),
-                      ],
-                    ),
+                    content: [
+                      InfoRow(icon: Icons.facebook, label: 'John Paul Sapasap'),
+                      SizedBox(height: 5.0),
+                      InfoRow(
+                          icon: FontAwesomeIcons.instagram,
+                          label: 'johnpaulsapasap'),
+                      SizedBox(height: 7.0),
+                      InfoRow(icon: FontAwesomeIcons.github, label: 'jayy404'),
+                    ],
                   ),
                 ],
               ),
@@ -158,10 +159,47 @@ class ProfileScreen extends StatelessWidget {
                     ),
                   ],
                 ),
-              )
+              ),
             ],
           ),
         ),
+      ),
+    );
+  }
+}
+
+class InfoBox extends StatelessWidget {
+  final String title;
+  final List<Widget> content;
+
+  const InfoBox({super.key, required this.title, required this.content});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(14.0),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(10.0),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            title,
+            style: const TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 16.0,
+              color: Colors.black,
+            ),
+          ),
+          const SizedBox(height: 10.0),
+          ListView(
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            children: content,
+          ),
+        ],
       ),
     );
   }
@@ -183,44 +221,15 @@ class InfoRow extends StatelessWidget {
         Expanded(
           child: Text(
             label,
-            style: const TextStyle(fontSize: 14.0, color: Colors.black),
+            style: const TextStyle(
+              fontSize: 14.0,
+              color: Colors.black,
+              height: 1.5,
+            ),
             softWrap: true,
           ),
         ),
       ],
-    );
-  }
-}
-
-class InfoBox extends StatelessWidget {
-  final String title;
-  final Widget content;
-
-  const InfoBox({super.key, required this.title, required this.content});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(16.0),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(10.0),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            title,
-            style: const TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 16.0,
-              color: Colors.black,
-            ),
-          ),
-          const SizedBox(height: 10.0),
-          content,
-        ],
-      ),
     );
   }
 }
